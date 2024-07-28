@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=VT323&display=swap" rel="stylesheet">
+  </head>
+  <style>
+    * {
+      font-family: "Kode Mono", sans-serif;
+    }
+  </style>
+  <body>
+    <h1>Neckar News</h1>
+    <section>
+      <ul>
+        {% for bm in bookmarks %}
+        <li>[{{ bm.ts }}] <a href="{{ bm.url }}">{{ bm.title }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+  </body>
+</html>
