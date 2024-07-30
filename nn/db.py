@@ -45,6 +45,7 @@ class SQLiteLinkStore(LinkStore):
                 url TEXT UNIQUE,
                 title TEXT,
                 preview TEXT,
+                txt TEXT,
                 ctime DEFAULT CURRENT_TIMESTAMP,
                 utime DEFAULT CURRENT_TIMESTAMP);
         """
@@ -53,7 +54,7 @@ class SQLiteLinkStore(LinkStore):
             create view if not exists view_latest
                 (ts, url, title, preview)
             as
-                select utime, url, title, preview
+                select date(utime), url, title, preview
                 from bookmarks
                 order by utime desc
         """
@@ -62,15 +63,34 @@ class SQLiteLinkStore(LinkStore):
     def close(self):
         self.conn.close()
 
-    def get_links(self, last: int = None, since: datetime.datetime = None):
+    def get_links(self, last: int = None, since: datetime.datetime = None, for_year: int = None):
         if last:
             sql = f"select * from view_latest limit {last}"
             cur = self.conn.cursor()
             cur.execute(sql)
             rows = cur.fetchall()
-            # FIXME: add conversion?
+            return rows
+        if for_year:
+            sql = f"""
+                select ts, url, title, preview from view_latest
+                where ts >= date('{for_year}-01-01')
+                      and ts <= date('{for_year}-12-31')
+            """
+            cur = self.conn.cursor()
+            cur.execute(sql)
+            rows = cur.fetchall()
             return rows
         return list()
+
+    def get_links_with_incomplete_title(self):
+        sql = """
+            select ts, url, title, preview from view_latest
+            where title is null or url = title
+        """
+        cur = self.conn.cursor()
+        cur.execute(sql)
+        rows = cur.fetchall()
+        return rows
 
     def add_links(self, links):
         sql = """
@@ -79,6 +99,14 @@ class SQLiteLinkStore(LinkStore):
         """
         cur = self.conn.cursor()
         cur.executemany(sql, links)
+        self.conn.commit()
+
+    def update_title(self, url, title):
+        sql = """
+            update bookmarks set title = ? where url = ?
+        """
+        cur = self.conn.cursor()
+        cur.execute(sql, (title, url))
         self.conn.commit()
 
 def create_linkstore(url):

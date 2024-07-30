@@ -15,10 +15,14 @@
     }
   </style>
   <body>
-    <h1>Neckar News</h1>
-    [ Latest
+    <h1>Neckar News Archives</h1>
+    [ <a href="./index.html">Latest</a>
     {% for yr in years %}
+      {% if yr == year %}
+      | {{yr}}
+      {% else %}
       | <a href="./{{ yr }}.html">{{yr}}</a>
+      {% endif %}
     {% endfor %}]
     <section>
       <ol>
