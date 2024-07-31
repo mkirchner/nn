@@ -29,7 +29,7 @@
     <br>
     <section>
         {% for bm in bookmarks %}
-          [{{ bm.ts[5:10] }}] <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(50) }}</a>
+          [{{ bm.ts[5:10] }}] <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(50, true) }}</a>
           <br>
         {% endfor %}
     </section>
