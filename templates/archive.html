@@ -4,33 +4,39 @@
     <meta charset="UTF-8">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet">
   </head>
   <style>
     * {
-      /*
-      font-family: "VT323", sans-serif;
-      */
       font-family: "Kode Mono", sans-serif;
+    }
+    html {
+      max-width: 38rem;
+      padding: 3em 1em;
+      margin: auto;
+      line-height: 1.75;
     }
   </style>
   <body>
     <h1>Neckar News Archives</h1>
-    [ <a href="./index.html">Latest</a>
-    {% for yr in years %}
-      {% if yr == year %}
-      | {{yr}}
-      {% else %}
-      | <a href="./{{ yr }}.html">{{yr}}</a>
-      {% endif %}
-    {% endfor %}]
     <section>
-      <ol>
+    [ <a href="./index.html">Latest</a> | Archives:
+    {% for yr in years -%}
+      {%- if yr == year -%}
+        {{yr}}
+      {%- else -%}
+        <a href="./{{ yr }}.html">{{yr - 2000}}</a>
+      {%- endif -%}
+      {%- if loop.last %} ] {%- else -%} | {%- endif -%}
+    {%- endfor %}
+    </section>
+    <br>
+
+    <section>
         {% for bm in bookmarks %}
-        <li>[{{ bm.ts }}] <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(60) }}</a>
-        </li>
+        [{{ bm.ts[5:10] }}] <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(50) }}</a>
+        <br>
         {% endfor %}
-      </ol>
     </section>
   </body>
 </html>
