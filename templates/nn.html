@@ -13,20 +13,32 @@
       */
       font-family: "Kode Mono", sans-serif;
     }
+    html {
+  max-width: 70ch;
+  padding: 3em 1em;
+  margin: auto;
+  line-height: 1.75;
+/*  font-size: 1.25em;*/
+}
   </style>
   <body>
     <h1>Neckar News</h1>
-    [ Latest
-    {% for yr in years %}
-      | <a href="./{{ yr }}.html">{{yr}}</a>
-    {% endfor %}]
     <section>
-      <ol>
+    [ Latest | Archives:
+    {% for yr in years -%}
+      <a href="./{{ yr }}.html">{{yr - 2000}}</a>
+      {%- if loop.last %} ] {%- else -%} | {%- endif -%}
+    {%- endfor %}
+    </section>
+    <br>
+    <section>
         {% for bm in bookmarks %}
-        <li>[{{ bm.ts }}] <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(60) }}</a>
-        </li>
+          [{{ bm.ts[5:10] }}] <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(50) }}</a>
+          <br>
         {% endfor %}
-      </ol>
+    </section>
+    <section>
+      <a href="./{{ yr }}.html#more">...</a>
     </section>
   </body>
 </html>

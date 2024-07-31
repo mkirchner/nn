@@ -6,4 +6,4 @@ update:
 	nn render-site -t docs
 	git add -u
 	git commit -m "release"
-	gpsup
+	git push --set-upstream origin $(git_current_branch)
