@@ -64,7 +64,6 @@ def render_site(db_url, target):
         links = db.get_links(for_year=year)
         bookmarks = [dict(ts=l[0], url=l[1], title=l[2], preview=l[3]) for l in links]
         #bookmarks.reverse()  # prefer asc time order
-        bookmarks.reverse()  # or don't
         template = env.get_template("archive.html")
         html = template.render(years=archive_years, year=year, bookmarks=bookmarks)
         with open(os.path.join(target, f"{year}.html"), "w", encoding="utf-8") as f:
