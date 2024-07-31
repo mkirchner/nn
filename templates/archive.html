@@ -23,7 +23,7 @@
     [ <a href="./index.html">Latest</a> | Archives:
     {% for yr in years -%}
       {%- if yr == year -%}
-        {{yr}}
+        {{yr - 2000}}
       {%- else -%}
         <a href="./{{ yr }}.html">{{yr - 2000}}</a>
       {%- endif -%}
@@ -34,7 +34,14 @@
 
     <section>
         {% for bm in bookmarks %}
-        [{{ bm.ts[5:10] }}] <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(50) }}</a>
+        [{{ bm.ts[5:10] }}]
+        {% if year == years[0] and loop.index0 == 50 %}
+        <a id="more" href="{{ bm.url }}" title="{{ bm.title }}">
+        {% else %}
+        <a href="{{ bm.url }}" title="{{ bm.title }}">
+        {% endif %}
+          {{ bm.title | truncate(50) }}
+        </a>
         <br>
         {% endfor %}
     </section>
