@@ -36,7 +36,7 @@
       text-decoration: underline;
     }
     html {
-      max-width: 70ch;
+      max-width: 80ch;
       padding: 3em 1em;
       margin: auto;
       line-height: 1.75;
@@ -65,7 +65,7 @@
         {% else %}
         <a href="{{ bm.url }}" title="{{ bm.title }}">
         {% endif %}
-          {{ bm.title | truncate(50) }}
+          {{ bm.title | truncate(60) }}
         </a>
         <br>
         {% endfor %}

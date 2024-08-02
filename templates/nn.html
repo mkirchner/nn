@@ -36,7 +36,7 @@
       text-decoration: underline;
     }
     html {
-      max-width: 70ch;
+      max-width: 80ch;
       padding: 3em 1em;
       margin: auto;
       line-height: 1.75;
@@ -54,7 +54,7 @@
     <br>
     <section>
         {% for bm in bookmarks %}
-          [{{ bm.ts[5:10] }}] <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(50, true) }}</a>
+          [{{ bm.ts[5:10] }}] <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(60, true) }}</a>
           <br>
         {% endfor %}
     </section>
