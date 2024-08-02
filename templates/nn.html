@@ -41,6 +41,20 @@
       margin: auto;
       line-height: 1.75;
     }
+    th, td {
+      padding: 0;
+      border-spacing: 0;
+      border-collapse: collapse;
+      /* border: 1px solid black; */
+      line-height: 1.6;
+    }
+    td.date {
+      white-space: nowrap;
+      vertical-align: top;
+    }
+    td.ref {
+      padding-left: 1ch;
+    }
   </style>
   <body>
     <h1>Neckar News</h1>
@@ -53,10 +67,18 @@
     </section>
     <br>
     <section>
+        <table>
         {% for bm in bookmarks %}
-          [{{ bm.ts[5:10] }}] <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(60, true) }}</a>
-          <br>
+          <tr>
+            <td class="date">
+              [{{ bm.ts[5:10] }}]
+            </td>
+            <td class="ref">
+              <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(60, true) }}</a>
+            </td>
+          </tr>
         {% endfor %}
+        </table>
     </section>
     <section>
       <a href="./{{ years[0] }}.html#more">...</a>

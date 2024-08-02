@@ -41,6 +41,20 @@
       margin: auto;
       line-height: 1.75;
     }
+    th, td {
+      padding: 0;
+      border-spacing: 0;
+      border-collapse: collapse;
+      /* border: 1px solid black; */
+      line-height: 1.6;
+    }
+    td.date {
+      white-space: nowrap;
+      vertical-align: top;
+    }
+    td.ref {
+      padding-left: 1ch;
+    }
   </style>
   <body>
     <h1>Neckar News Archives</h1>
@@ -58,17 +72,24 @@
     <br>
 
     <section>
+      <table>
         {% for bm in bookmarks %}
-        [{{ bm.ts[5:10] }}]
-        {% if year == years[0] and loop.index0 == 50 %}
-        <a id="more" href="{{ bm.url }}" title="{{ bm.title }}">
-        {% else %}
-        <a href="{{ bm.url }}" title="{{ bm.title }}">
-        {% endif %}
-          {{ bm.title | truncate(60) }}
-        </a>
-        <br>
+          <tr>
+            <td class="date">
+              [{{ bm.ts[5:10] }}]
+            </td>
+            <td class="ref">
+              {% if year == years[0] and loop.index0 == 50 %}
+              <a id="more" href="{{ bm.url }}" title="{{ bm.title }}">
+              {% else %}
+              <a href="{{ bm.url }}" title="{{ bm.title }}">
+              {% endif %}
+              {{ bm.title | truncate(60, true) }}
+              </a>
+            </td>
+          </tr>
         {% endfor %}
+      </table>
     </section>
   </body>
 </html>
