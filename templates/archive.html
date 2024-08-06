@@ -55,14 +55,17 @@
     td.ref {
       padding-left: 1ch;
     }
+    span.current {
+      font-weight: bold;
+    }
   </style>
   <body>
-    <h1>Neckar News Archives</h1>
+    <h1>The Deep End Archives</h1>
     <section>
     [ <a href="./index.html">Latest</a> | Archives:
     {% for yr in years -%}
       {%- if yr == year -%}
-        {{yr - 2000}}
+      <span class="current">{{yr - 2000}}</span>
       {%- else -%}
         <a href="./{{ yr }}.html">{{yr - 2000}}</a>
       {%- endif -%}
