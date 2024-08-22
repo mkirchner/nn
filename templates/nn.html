@@ -61,9 +61,17 @@
       padding-left: 1ch;
       line-height: 1.6;
     }
+    header {
+      position: sticky;
+      top:0;
+      background: #fff;
+      padding: 0.5em 0;
+    }
   </style>
   <body>
+    <header>
     <h1>The Deep End</h1>
+    </header>
     <section>
     [ Latest | Archives:
     {% for yr in years -%}
