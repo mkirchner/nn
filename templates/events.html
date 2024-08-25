@@ -18,6 +18,8 @@
     }
     h1,h2,h3 {
       font-family: "Kode Mono", sans-serif;
+      border: 0;
+      margin: 0;
     }
     strong {
       color: #222;
@@ -29,7 +31,7 @@
 
     a:visited {
       text-decoration: none;
-      color: #444;
+      /* color: #444; */
     }
 
     a:hover {
@@ -55,11 +57,18 @@
     td.date {
       white-space: nowrap;
       vertical-align: top;
+      text-align: right;
+      /* border-right: 1px solid #444; */
       line-height: 1.6;
+      padding-right: 1ch;
     }
     td.ref {
       padding-left: 1ch;
       line-height: 1.6;
+    }
+    td.spacer {
+      padding-top: 1em;
+      padding-bottom: 1em;
     }
     p.header {
       text-align: left;
@@ -79,35 +88,49 @@
     }
   </style>
   <body>
-    <section>
+    <section class="header">
       <p class="header">
-      <strong>The Deep End</strong>
-      <span class="right-aligned">
-        Latest | <a href="./events.html">Events</a> | Archives:
-    {% for yr in years -%}
-      <a href="./{{ yr }}.html">{{yr - 2000}}</a>
-      {%- if not loop.last -%} | {%- endif -%}
-    {%- endfor %}
-      </span>
+        <strong>The Deep End</strong>
+        <span class="right-aligned">
+            <a href="./index.html">Latest</a> | Events | Archives:
+          {% for yr in years -%}
+            <a href="./{{ yr }}.html">{{yr - 2000}}</a>
+            {%- if not loop.last -%} | {%- endif -%}
+          {%- endfor %}
+        </span>
       </p>
-    <hr>
+      <hr>
     </section>
     <section>
         <table>
-        {% for bm in bookmarks %}
+          {% for event in events %}
+          <!--- separator -->
           <tr>
-            <td class="date">
-              [{{ bm.ts[5:10] }}]
+            <td class="date" rowspan=3>
+              {{ event.start.strftime('%Y/%m/%d') }}<br>
+            {{ event.start.strftime('%H:%M') }}-{{ event.end.strftime('%H:%M') }}
             </td>
             <td class="ref">
-              <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(60, true) }}</a>
+              <a href="{{ event.ref }}" title="{{ event.title }}">
+                {{ event.title }}
+              </a>
             </td>
           </tr>
-        {% endfor %}
+          <tr>
+          <td class="ref">
+            {% if event.address and event.venue %}
+              {{ event.venue }}, {{ event.address }}
+            {% elif event.venue %}
+              {{ event.venue }}, {{ event.address }}
+            {% endif %}
+          </td>
+          </tr>
+          <tr>
+            <td class="ref">{{ event.description }}</td>
+          </tr>
+          <tr class="spacer"><td colspan=2 class="spacer"></td></tr>
+          {% endfor %}
         </table>
-    </section>
-    <section>
-      <a href="./{{ years[0] }}.html#more">...</a>
     </section>
   </body>
 </html>
