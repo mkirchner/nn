@@ -3,7 +3,7 @@ import nn.db
 import nn.srl
 import nn.pocket
 import nn.crawl
-import nn.events
+# import nn.events
 import os.path
 from tabulate import tabulate
 # this will need to go into a separate file
@@ -56,11 +56,11 @@ def render_site(db_url, target):
     db =  nn.db.create_store(db_url)
 
     # events
-    events = db.get_events(last=20)  # FIXME: last gets ignored
-    template = env.get_template("events.html")
-    html = template.render(years=archive_years, events=events)
-    with open(os.path.join(target, "events.html"), "w", encoding="utf-8") as f:
-        f.write(html)
+    # events = db.get_events(last=20)  # FIXME: last gets ignored
+    # template = env.get_template("events.html")
+    # html = template.render(years=archive_years, events=events)
+    # with open(os.path.join(target, "events.html"), "w", encoding="utf-8") as f:
+    #     f.write(html)
 
     # index.html
     links = db.get_links(last=50)

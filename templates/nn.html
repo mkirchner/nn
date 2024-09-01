@@ -83,7 +83,7 @@
       <p class="header">
       <strong>The Deep End</strong>
       <span class="right-aligned">
-        Latest | <a href="./events.html">Events</a> | Archives:
+        Latest | Archives:
     {% for yr in years -%}
       <a href="./{{ yr }}.html">{{yr - 2000}}</a>
       {%- if not loop.last -%} | {%- endif -%}
@@ -100,7 +100,7 @@
               [{{ bm.ts[5:10] }}]
             </td>
             <td class="ref">
-              <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(60, true) }}</a>
+              <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(70, true) }}</a>
             </td>
           </tr>
         {% endfor %}
