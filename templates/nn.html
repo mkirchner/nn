@@ -61,25 +61,37 @@
       padding-left: 1ch;
       line-height: 1.6;
     }
-    header {
-      position: sticky;
-      top:0;
-      background: #fff;
-      padding: 0.5em 0;
+    p.header {
+      text-align: left;
+      margin-bottom: 0;
+    }
+    span.right-aligned {
+      float: right;
+    }
+    hr {
+      display: block;
+      margin-top: 0em;
+      margin-bottom: 0.5em;
+      margin-left: auto;
+      margin-right: auto;
+      border-style: solid;
+      border-width: 1px;
     }
   </style>
   <body>
-    <header>
-    <h1>The Deep End</h1>
-    </header>
     <section>
-    [ Latest | Archives:
+      <p class="header">
+      <strong>The Deep End</strong>
+      <span class="right-aligned">
+        Latest | Archives:
     {% for yr in years -%}
       <a href="./{{ yr }}.html">{{yr - 2000}}</a>
-      {%- if loop.last %} ] {%- else -%} | {%- endif -%}
+      {%- if not loop.last -%} | {%- endif -%}
     {%- endfor %}
+      </span>
+      </p>
+    <hr>
     </section>
-    <br>
     <section>
         <table>
         {% for bm in bookmarks %}
@@ -88,7 +100,7 @@
               [{{ bm.ts[5:10] }}]
             </td>
             <td class="ref">
-              <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(60, true) }}</a>
+              <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(70, true) }}</a>
             </td>
           </tr>
         {% endfor %}

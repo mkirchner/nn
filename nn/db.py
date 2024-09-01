@@ -1,10 +1,13 @@
 from abc import ABC, abstractmethod
 import datetime
+from typing import List
 
-class LinkStoreError(RuntimeError):
+
+class StoreError(RuntimeError):
     pass
 
-class LinkStore(ABC):
+
+class Store(ABC):
     @abstractmethod
     def close(self):
         pass
@@ -13,14 +16,21 @@ class LinkStore(ABC):
     def get_links(self, last: int = None, since: datetime.datetime = None):
         pass
 
+    @abstractmethod
+    def get_events(self, last: int = None, since: datetime.datetime = None):
+        pass
+
 
 import sqlite3
 from urllib.parse import urlparse
+from nn.events import Event
 
-class SQLiteLinkStoreError(LinkStoreError):
+
+class SQLiteStoreError(StoreError):
     pass
 
-class SQLiteLinkStore(LinkStore):
+
+class SQLiteStore(Store):
     def __init__(self, url):
         # parse URL
         o = urlparse(url)
@@ -59,11 +69,28 @@ class SQLiteLinkStore(LinkStore):
                 order by utime desc
         """
         self.conn.execute(sql)
+        sql = """
+            create table if not exists events (
+                id INTEGER PRIMARY KEY,
+                key TEXT,
+                title TEXT,
+                description TEXT,
+                start TEXT,
+                end TEXT,
+                venue TEXT,
+                address TEXT,
+                url TEXT UNIQUE,
+                ctime DEFAULT CURRENT_TIMESTAMP,
+                utime DEFAULT CURRENT_TIMESTAMP)
+        """
+        self.conn.execute(sql)
 
     def close(self):
         self.conn.close()
 
-    def get_links(self, last: int = None, since: datetime.datetime = None, for_year: int = None):
+    def get_links(
+        self, last: int = None, since: datetime.datetime = None, for_year: int = None
+    ):
         if last:
             sql = f"select * from view_latest limit {last}"
             cur = self.conn.cursor()
@@ -101,7 +128,7 @@ class SQLiteLinkStore(LinkStore):
         cur.executemany(sql, links)
         self.conn.commit()
 
-    def update_title(self, url, title):
+    def update_link_title(self, url, title):
         sql = """
             update bookmarks set title = ? where url = ?
         """
@@ -109,7 +136,38 @@ class SQLiteLinkStore(LinkStore):
         cur.execute(sql, (title, url))
         self.conn.commit()
 
-def create_linkstore(url):
-    # factory method with a single switch
-    return SQLiteLinkStore(url)
+    def add_events(self, events: List[Event]):
+        sql = """
+        insert into events
+            (key, title, description, start, end, venue, address, url)
+        values
+            (:key, :title, :description, :start, :end, :venue, :address, :ref)
+        """
+        cur = self.conn.cursor()
+        dicts = [e.dict() for e in events]
+        cur.executemany(sql, dicts)
+        self.conn.commit()
 
+    def get_events(self, last: int = None, since: datetime.datetime = None):
+        sql = """
+            select key, title, description, start, end, venue,
+                   address, url
+            from events
+            where
+                datetime(end) > datetime()
+                and datetime(start) < datetime('now', '+3 months')
+            order by datetime(start);
+        """
+        cur = self.conn.cursor()
+        cur.execute(sql)
+        rows = cur.fetchall()
+        columns = ['key', 'title', 'description', 'start', 'end',
+                   'venue', 'address', 'ref']
+        # this seems like a lot of wasteful conversion
+        events = [Event(**dict(zip(columns, row))) for row in rows]
+        return events
+
+
+def create_store(url):
+    # factory method with a single switch
+    return SQLiteStore(url)
