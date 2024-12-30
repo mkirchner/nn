@@ -109,7 +109,7 @@ and (max-width : 750px) {
 		    
 	      {% else %}
 
-                      <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(80, true) }}</a>
+                      <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(80, false) }}</a>
 	      {% endif %}
 
                   <span class="sitebit comhead">(<span class="sitestr">{{bm.site}}</span>)</span></span>
