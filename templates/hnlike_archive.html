@@ -54,6 +54,9 @@ a:visited { color:#828282; text-decoration:none; }
 @media only screen
 and (min-width : 300px)
 and (max-width : 750px) {
+  html {
+  -webkit-text-size-adjust: 100%;
+  }
   #hnmain { width: 100%; min-width: 0; }
   body { padding: 0; margin: 0; width: 100%; }
   td { height: inherit !important; }
@@ -81,7 +84,7 @@ and (max-width : 750px) {
 		  <a href= "./index.html">latest</a>|
 		  {%- for yr in years -%}
 		    {%- if yr == year -%}
-		    <a href="./{{ yr }}.html"><b>{{yr - 2000}}</b></a>
+		    <a href="./{{ yr }}.html"><u>{{yr - 2000}}</u></a>
 		    {%- else -%}
 		    <a href="./{{ yr }}.html">{{yr - 2000}}</a>
 		    {%- endif -%}
