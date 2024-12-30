@@ -1,551 +1,1230 @@
-<!doctype html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en" op="news">
   <head>
     <meta charset="UTF-8">
+    <meta name="referrer" content="origin">
+    <meta name="viewport" content=
+    "width=device-width, initial-scale=1.0">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="rss">
+    <link rel="manifest" href="./site.webmanifest">
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
-<link rel="manifest" href="./site.webmanifest">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400&family=Inconsolata:wght@500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <title>
+      The Deep End
+    </title>
+<style>
+body  { font-family:Verdana, Geneva, sans-serif; font-size:10pt; color:#828282; }
+td    { font-family:Verdana, Geneva, sans-serif; font-size:10pt; color:#828282; }
+
+a:link    { color:#000000; text-decoration:none; }
+a:visited { color:#828282; text-decoration:none; }
+
+.default { font-family:Verdana, Geneva, sans-serif; font-size: 10pt; color:#828282; }
+.title   { font-family:Verdana, Geneva, sans-serif; font-size: 10pt; color:#828282; overflow:hidden; }
+.pagetop { font-family:Verdana, Geneva, sans-serif; font-size: 10pt; color:#222222; line-height:12px; }
+.comhead { font-family:Verdana, Geneva, sans-serif; font-size:  8pt; color:#828282; }
+.hnname  { margin-left:1px; margin-right: 5px; }
+
+#hnmain { min-width: 796px; }
+
+.title a { word-break: break-word; }
+
+.comment a:link, .comment a:visited { text-decoration: underline; }
+
+.pagetop a:visited { color:#000000;}
+
+.comhead a:link, .subtext a:visited { color:#828282; }
+.comhead a:hover { text-decoration:underline; }
+
+.default p { margin-top: 8px; margin-bottom: 0px; }
+
+.rotate180 {
+  -webkit-transform: rotate(180deg);  /* Chrome and other webkit browsers */
+  -moz-transform:    rotate(180deg);  /* FF */
+  -o-transform:      rotate(180deg);  /* Opera */
+  -ms-transform:     rotate(180deg);  /* IE9 */
+  transform:         rotate(180deg);  /* W3C complaint browsers */
+
+  /* IE8 and below */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=0, M21=0, M22=-1, DX=0, DY=0, SizingMethod='auto expand')";
+}
+
+/* mobile device */
+@media only screen
+and (min-width : 300px)
+and (max-width : 750px) {
+  #hnmain { width: 100%; min-width: 0; }
+  body { padding: 0; margin: 0; width: 100%; }
+  td { height: inherit !important; }
+  .title, .comment { font-size: inherit;  }
+  span.pagetop { display: block; margin: 3px 5px; font-size: 12px; line-height: normal }
+  span.pagetop b { display: block; font-size: 15px; }
+  table.comment-tree .comment a { display: inline-block; max-width: 200px; overflow: hidden; white-space: nowrap;
+    text-overflow: ellipsis; vertical-align:top; }
+  .title { font-size: 11pt; line-height: 14pt;  }
+}
+
+</style>
   </head>
-  <style>
-    body {
-      font-family: Inconsolata, sans-serif;
-      font-weight: 500;
-      color: #444;
-    }
-    h1,h2,h3 {
-      font-family: "Kode Mono", sans-serif;
-    }
-    strong {
-      color: #222;
-    }
-    a:link {
-      text-decoration: none;
-      color: #d13490;
-    }
-
-    a:visited {
-      text-decoration: none;
-      color: #444;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    a:active {
-      text-decoration: underline;
-    }
-    html {
-      max-width: 80ch;
-      padding: 3em 1em;
-      margin: auto;
-      line-height: 1.75;
-    }
-    th, td {
-      padding: 0;
-      border-spacing: 0;
-      border-collapse: collapse;
-      /* border: 1px solid black; */
-      line-height: 1.6;
-    }
-    td.date {
-      white-space: nowrap;
-      vertical-align: top;
-      line-height: 1.6;
-    }
-    td.ref {
-      padding-left: 1ch;
-      line-height: 1.6;
-    }
-    p.header {
-      text-align: left;
-      margin-bottom: 0;
-    }
-    span.right-aligned {
-      float: right;
-    }
-    hr {
-      display: block;
-      margin-top: 0em;
-      margin-bottom: 0.5em;
-      margin-left: auto;
-      margin-right: auto;
-      border-style: solid;
-      border-width: 1px;
-    }
-  </style>
   <body>
-    <section>
-      <p class="header">
-      <strong>The Deep End</strong>
-      <span class="right-aligned">
-        Latest | Archives:
-    <a href="./2024.html">24</a>|<a href="./2023.html">23</a>|<a href="./2022.html">22</a>|<a href="./2021.html">21</a>|<a href="./2020.html">20</a>|<a href="./2019.html">19</a>|<a href="./2018.html">18</a>|<a href="./2017.html">17</a>|<a href="./2016.html">16</a>
-      </span>
-      </p>
-    <hr>
-    </section>
-    <section>
-        <table>
-        
-          <tr>
-            <td class="date">
-              [12-30]
-            </td>
-            <td class="ref">
-              <a href="https://daringfireball.net/2024/12/openai_unimaginable" title="Daring Fireball: OpenAI’s Board, Paraphrased: ‘To Succeed, All We Need Is Unimaginable Sums of Money’">Daring Fireball: OpenAI’s Board, Paraphrased: ‘To Succeed...</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-30]
-            </td>
-            <td class="ref">
-              <a href="https://www.codycomputer.org/" title="The Cody Computer Site">The Cody Computer Site</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-29]
-            </td>
-            <td class="ref">
-              <a href="https://lodev.org/cgtutor/raycasting.html" title="Raycasting">Raycasting</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-29]
-            </td>
-            <td class="ref">
-              <a href="https://nicolascarpi.github.io/openbsd/2019/04/03/openbsd-mail-server.html" title="Personal mail server on OpenBSD">Personal mail server on OpenBSD</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-29]
-            </td>
-            <td class="ref">
-              <a href="https://openbsd.amsterdam/contact.html" title="Book your VM — OpenBSD Amsterdam">Book your VM — OpenBSD Amsterdam</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-29]
-            </td>
-            <td class="ref">
-              <a href="https://helendoron.de/methode/" title="Helen Doron English Methode | Mit Spiel und Spaß Englisch lernen">Helen Doron English Methode | Mit Spiel und Spaß Englisch lernen</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-28]
-            </td>
-            <td class="ref">
-              <a href="https://www.righto.com/2024/12/this-die-photo-of-pentium-shows.html" title="Intel&#39;s $475 million error: the silicon behind the Pentium division bug">Intel&#39;s $475 million error: the silicon behind the Pentiu...</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-27]
-            </td>
-            <td class="ref">
-              <a href="https://www.bcs.org/articles-opinion-and-research/does-current-ai-represent-a-dead-end/" title="Does current AI represent a dead end? | BCS">Does current AI represent a dead end? | BCS</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-27]
-            </td>
-            <td class="ref">
-              <a href="http://philcalcado.com/2024/12/14/building-ai-products-part-i.html" title="Building AI Products—Part I: Back-end Architecture">Building AI Products—Part I: Back-end Architecture</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-27]
-            </td>
-            <td class="ref">
-              <a href="https://dev.to/frosnerd/writing-my-own-boot-loader-3mld" title="Writing My Own Boot Loader - DEV Community">Writing My Own Boot Loader - DEV Community</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-27]
-            </td>
-            <td class="ref">
-              <a href="https://github.com/cfenollosa/os-tutorial" title="GitHub - cfenollosa/os-tutorial: How to create an OS from scratch">GitHub - cfenollosa/os-tutorial: How to create an OS from scratch</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-27]
-            </td>
-            <td class="ref">
-              <a href="https://www.nand2tetris.org/" title="Home | nand2tetris">Home | nand2tetris</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-26]
-            </td>
-            <td class="ref">
-              <a href="https://github.com/skeeto/endlessh" title="GitHub - skeeto/endlessh: SSH tarpit that slowly sends an endless banner">GitHub - skeeto/endlessh: SSH tarpit that slowly sends an...</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-26]
-            </td>
-            <td class="ref">
-              <a href="https://github.com/dtolnay/semver-trick" title="GitHub - dtolnay/semver-trick: How to avoid complicated coordinated upgrades">GitHub - dtolnay/semver-trick: How to avoid complicated c...</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-26]
-            </td>
-            <td class="ref">
-              <a href="https://brennan.io/2015/01/16/write-a-shell-in-c/" title="Tutorial - Write a Shell in C • Stephen Brennan">Tutorial - Write a Shell in C • Stephen Brennan</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-26]
-            </td>
-            <td class="ref">
-              <a href="https://www.jmeiners.com/lc3-vm/" title="Write your Own Virtual Machine">Write your Own Virtual Machine</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-25]
-            </td>
-            <td class="ref">
-              <a href="https://iss-mimic.github.io/Mimic/" title=""></a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-25]
-            </td>
-            <td class="ref">
-              <a href="https://papermatch.mitanshu.tech/" title="PaperMatch">PaperMatch</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-24]
-            </td>
-            <td class="ref">
-              <a href="https://www.digikey.com/en/maker/projects/a-step-by-step-guide-to-build-a-low-cost-drone-using-esp32/8afccd0690574bcebfa0d2ad6fd0a391" title="How to Build a Low-Cost Drone with ESP32">How to Build a Low-Cost Drone with ESP32</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-23]
-            </td>
-            <td class="ref">
-              <a href="https://interconnected.org/home/2024/12/23/jailbreaking" title="Narrative jailbreaking for fun and profit (Interconnected)">Narrative jailbreaking for fun and profit (Interconnected)</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-23]
-            </td>
-            <td class="ref">
-              <a href="https://blog.pgvecto.rs/why-hnsw-is-not-the-answer" title="Why HNSW is Not the Answer">Why HNSW is Not the Answer</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-23]
-            </td>
-            <td class="ref">
-              <a href="https://www.let.rug.nl/bos/lpn//" title="Learn Prolog Now!">Learn Prolog Now!</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-23]
-            </td>
-            <td class="ref">
-              <a href="https://berthub.eu/articles/posts/on-long-term-software-development/" title="On Long Term Software Development - Bert Hubert&#39;s writings">On Long Term Software Development - Bert Hubert&#39;s writings</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-23]
-            </td>
-            <td class="ref">
-              <a href="https://avi.im/blag/2024/sqlite-past-present-future/" title="How bloom filters made SQLite 10x faster - blag">How bloom filters made SQLite 10x faster - blag</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-22]
-            </td>
-            <td class="ref">
-              <a href="https://anvaka.github.io/city-roads/?" title="Draw all roads in a city at once">Draw all roads in a city at once</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-21]
-            </td>
-            <td class="ref">
-              <a href="https://www.rfleury.com/p/untangling-lifetimes-the-arena-allocator" title="Untangling Lifetimes: The Arena Allocator">Untangling Lifetimes: The Arena Allocator</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-21]
-            </td>
-            <td class="ref">
-              <a href="https://distill.pub/2021/gnn-intro" title="A Gentle Introduction to Graph Neural Networks">A Gentle Introduction to Graph Neural Networks</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-21]
-            </td>
-            <td class="ref">
-              <a href="https://distill.pub/2021/understanding-gnns" title="Understanding Convolutions on Graphs">Understanding Convolutions on Graphs</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-21]
-            </td>
-            <td class="ref">
-              <a href="https://www.home-assistant.io/blog/2024/12/19/voice-preview-edition-the-era-of-open-voice/" title="The era of open voice assistants has arrived - Home Assistant">The era of open voice assistants has arrived - Home Assistant</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-21]
-            </td>
-            <td class="ref">
-              <a href="https://www.anthropic.com/research/building-effective-agents" title="Building effective agents \ Anthropic">Building effective agents \ Anthropic</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-20]
-            </td>
-            <td class="ref">
-              <a href="https://huggingface.co/spaces/HuggingFaceH4/blogpost-scaling-test-time-compute" title="Scaling test-time compute - a Hugging Face Space by HuggingFaceH4">Scaling test-time compute - a Hugging Face Space by HuggingFaceH4</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-18]
-            </td>
-            <td class="ref">
-              <a href="https://rahul.gopinath.org/post/2019/12/07/python-mci/" title="Python Meta Circular Interpreter">Python Meta Circular Interpreter</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-18]
-            </td>
-            <td class="ref">
-              <a href="https://github.com/includeos/IncludeOS" title="GitHub - includeos/IncludeOS: A minimal, resource efficient unikernel for cloud services">GitHub - includeos/IncludeOS: A minimal, resource efficie...</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-17]
-            </td>
-            <td class="ref">
-              <a href="https://automerge.github.io/blog/automerge-2/" title="Automerge 2.0 | Automerge CRDT">Automerge 2.0 | Automerge CRDT</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-17]
-            </td>
-            <td class="ref">
-              <a href="https://www.more-magic.net/posts/crunch.html" title="Let&#39;s CRUNCH! | More magic">Let&#39;s CRUNCH! | More magic</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-17]
-            </td>
-            <td class="ref">
-              <a href="https://sailor.li/aocnds.html" title="Advent of Code on the Nintendo DS">Advent of Code on the Nintendo DS</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-16]
-            </td>
-            <td class="ref">
-              <a href="https://knowyourmeme.com/memes/shoggoth-with-smiley-face-artificial-intelligence" title="Shoggoth with Smiley Face (Artificial Intelligence) | Know Your Meme">Shoggoth with Smiley Face (Artificial Intelligence) | Kno...</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-15]
-            </td>
-            <td class="ref">
-              <a href="https://irrationalanalysis.substack.com/p/tenstorrent-and-the-state-of-ai-hardware" title="Tenstorrent and the State of AI Hardware Startups">Tenstorrent and the State of AI Hardware Startups</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-15]
-            </td>
-            <td class="ref">
-              <a href="https://rish-01.github.io/blog/posts/ml_estimation/" title="Maximum Likelihood Estimation and Loss Functions | Rish&#39;s AI Notes">Maximum Likelihood Estimation and Loss Functions | Rish&#39;s...</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-15]
-            </td>
-            <td class="ref">
-              <a href="https://cacm.acm.org/opinion/on-program-synthesis-and-large-language-models/" title="On Program Synthesis and Large Language Models – Communications of the ACM">On Program Synthesis and Large Language Models – Communic...</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-15]
-            </td>
-            <td class="ref">
-              <a href="https://siboehm.com/articles/22/Fast-MMM-on-CPU" title="Fast Multidimensional Matrix Multiplication on CPU from Scratch">Fast Multidimensional Matrix Multiplication on CPU from Scratch</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-15]
-            </td>
-            <td class="ref">
-              <a href="https://siboehm.com/articles/22/CUDA-MMM" title="How to Optimize a CUDA Matmul Kernel for cuBLAS-like Performance: a Worklog">How to Optimize a CUDA Matmul Kernel for cuBLAS-like Perf...</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-15]
-            </td>
-            <td class="ref">
-              <a href="https://andrewkchan.dev/posts/yalm.html" title="Fast LLM Inference From Scratch">Fast LLM Inference From Scratch</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-15]
-            </td>
-            <td class="ref">
-              <a href="https://docs.zml.ai/" title="Welcome to ZML - ZML">Welcome to ZML - ZML</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-15]
-            </td>
-            <td class="ref">
-              <a href="https://github.com/JanNeuendorf/SVC16" title="GitHub - JanNeuendorf/SVC16: Simplest Virtual Computer">GitHub - JanNeuendorf/SVC16: Simplest Virtual Computer</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-13]
-            </td>
-            <td class="ref">
-              <a href="https://lwn.net/Articles/997784/" title="Rust&#39;s incremental compiler architecture [LWN.net]">Rust&#39;s incremental compiler architecture [LWN.net]</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-13]
-            </td>
-            <td class="ref">
-              <a href="https://souzatharsis.github.io/tamingllms/markdown/toc.html" title="Taming LLMs">Taming LLMs</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-13]
-            </td>
-            <td class="ref">
-              <a href="https://www.alexmurrell.co.uk/articles/the-age-of-average" title="The age of average — Alex Murrell">The age of average — Alex Murrell</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-11]
-            </td>
-            <td class="ref">
-              <a href="https://developers.redhat.com/articles/2024/12/11/making-memcpynull-null-0-well-defined" title="Making memcpy(NULL, NULL, 0) well-defined | Red Hat Developer">Making memcpy(NULL, NULL, 0) well-defined | Red Hat Developer</a>
-            </td>
-          </tr>
-        
-          <tr>
-            <td class="date">
-              [12-11]
-            </td>
-            <td class="ref">
-              <a href="https://computeradsfromthepast.substack.com/p/unix-review-magazine-interviews-larry" title="UNIX Review Magazine Interviews Larry Tesler">UNIX Review Magazine Interviews Larry Tesler</a>
-            </td>
-          </tr>
-        
-        </table>
-    </section>
-    <section>
-      <a href="./2024.html#more">...</a>
-    </section>
+    <center>
+      <table id="hnmain" border="0" cellpadding="0" cellspacing="0"
+						    width="85%">
+
+        <tr>
+          <td bgcolor="#d13490">
+            <table border="0" cellpadding="0" cellspacing="0"
+            width="100%" style="padding:2px">
+              <tr>
+                <td style="line-height:16pt; height:16px;">
+                  <span class="pagetop">
+		  <b class="hnname"><a href= "news">The Deep End</a></b>
+		  <a href= "./index.html">latest</a>|<a href="./2024.html">24</a>|<a href="./2023.html">23</a>|<a href="./2022.html">22</a>|<a href="./2021.html">21</a>|<a href="./2020.html">20</a>|<a href="./2019.html">19</a>|<a href="./2018.html">18</a>|<a href="./2017.html">17</a>|<a href="./2016.html">16</a>
+		  </span>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr id="pagespace" title="" style="height:10px">
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>
+            <table border="0" cellpadding="0" cellspacing="0">
+
+            
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.30</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://docs.espressif.com/projects/espressif-esp-drone/en/latest/index.html" title="ESP-Drone — ESP-Drone documentation">ESP-Drone — ESP-Drone documentation</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "docs.espressif.com"><span class="sitestr">docs.espressif.com</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.30</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://daringfireball.net/2024/12/openai_unimaginable" title="Daring Fireball: OpenAI’s Board, Paraphrased: ‘To Succeed, All We Need Is Unimaginable Sums of Money’">Daring Fireball: OpenAI’s Board, Paraphrased: ‘To Succeed, All We Need Is Uni...</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "daringfireball.net"><span class="sitestr">daringfireball.net</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.30</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://www.codycomputer.org/" title="The Cody Computer Site">The Cody Computer Site</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "www.codycomputer.org"><span class="sitestr">www.codycomputer.org</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.29</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://lodev.org/cgtutor/raycasting.html" title="Raycasting">Raycasting</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "lodev.org"><span class="sitestr">lodev.org</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.29</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://nicolascarpi.github.io/openbsd/2019/04/03/openbsd-mail-server.html" title="Personal mail server on OpenBSD">Personal mail server on OpenBSD</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "nicolascarpi.github.io"><span class="sitestr">nicolascarpi.github.io</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.29</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://openbsd.amsterdam/contact.html" title="Book your VM — OpenBSD Amsterdam">Book your VM — OpenBSD Amsterdam</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "openbsd.amsterdam"><span class="sitestr">openbsd.amsterdam</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.29</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://helendoron.de/methode/" title="Helen Doron English Methode | Mit Spiel und Spaß Englisch lernen">Helen Doron English Methode | Mit Spiel und Spaß Englisch lernen</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "helendoron.de"><span class="sitestr">helendoron.de</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.28</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://www.righto.com/2024/12/this-die-photo-of-pentium-shows.html" title="Intel&#39;s $475 million error: the silicon behind the Pentium division bug">Intel&#39;s $475 million error: the silicon behind the Pentium division bug</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "www.righto.com"><span class="sitestr">www.righto.com</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.27</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://www.bcs.org/articles-opinion-and-research/does-current-ai-represent-a-dead-end/" title="Does current AI represent a dead end? | BCS">Does current AI represent a dead end? | BCS</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "www.bcs.org"><span class="sitestr">www.bcs.org</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.27</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="http://philcalcado.com/2024/12/14/building-ai-products-part-i.html" title="Building AI Products—Part I: Back-end Architecture">Building AI Products—Part I: Back-end Architecture</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "philcalcado.com"><span class="sitestr">philcalcado.com</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.27</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://dev.to/frosnerd/writing-my-own-boot-loader-3mld" title="Writing My Own Boot Loader - DEV Community">Writing My Own Boot Loader - DEV Community</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "dev.to"><span class="sitestr">dev.to</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.27</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://github.com/cfenollosa/os-tutorial" title="GitHub - cfenollosa/os-tutorial: How to create an OS from scratch">GitHub - cfenollosa/os-tutorial: How to create an OS from scratch</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "github.com"><span class="sitestr">github.com</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.27</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://www.nand2tetris.org/" title="Home | nand2tetris">Home | nand2tetris</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "www.nand2tetris.org"><span class="sitestr">www.nand2tetris.org</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.26</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://github.com/skeeto/endlessh" title="GitHub - skeeto/endlessh: SSH tarpit that slowly sends an endless banner">GitHub - skeeto/endlessh: SSH tarpit that slowly sends an endless banner</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "github.com"><span class="sitestr">github.com</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.26</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://github.com/dtolnay/semver-trick" title="GitHub - dtolnay/semver-trick: How to avoid complicated coordinated upgrades">GitHub - dtolnay/semver-trick: How to avoid complicated coordinated upgrades</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "github.com"><span class="sitestr">github.com</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.26</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://brennan.io/2015/01/16/write-a-shell-in-c/" title="Tutorial - Write a Shell in C • Stephen Brennan">Tutorial - Write a Shell in C • Stephen Brennan</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "brennan.io"><span class="sitestr">brennan.io</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.26</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://www.jmeiners.com/lc3-vm/" title="Write your Own Virtual Machine">Write your Own Virtual Machine</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "www.jmeiners.com"><span class="sitestr">www.jmeiners.com</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.25</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://iss-mimic.github.io/Mimic/" title=""></a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "iss-mimic.github.io"><span class="sitestr">iss-mimic.github.io</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.25</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://papermatch.mitanshu.tech/" title="PaperMatch">PaperMatch</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "papermatch.mitanshu.tech"><span class="sitestr">papermatch.mitanshu.tech</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.24</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://www.digikey.com/en/maker/projects/a-step-by-step-guide-to-build-a-low-cost-drone-using-esp32/8afccd0690574bcebfa0d2ad6fd0a391" title="How to Build a Low-Cost Drone with ESP32">How to Build a Low-Cost Drone with ESP32</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "www.digikey.com"><span class="sitestr">www.digikey.com</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.23</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://interconnected.org/home/2024/12/23/jailbreaking" title="Narrative jailbreaking for fun and profit (Interconnected)">Narrative jailbreaking for fun and profit (Interconnected)</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "interconnected.org"><span class="sitestr">interconnected.org</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.23</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://blog.pgvecto.rs/why-hnsw-is-not-the-answer" title="Why HNSW is Not the Answer">Why HNSW is Not the Answer</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "blog.pgvecto.rs"><span class="sitestr">blog.pgvecto.rs</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.23</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://www.let.rug.nl/bos/lpn//" title="Learn Prolog Now!">Learn Prolog Now!</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  ""><span class="sitestr"></span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.23</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://berthub.eu/articles/posts/on-long-term-software-development/" title="On Long Term Software Development - Bert Hubert&#39;s writings">On Long Term Software Development - Bert Hubert&#39;s writings</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "berthub.eu"><span class="sitestr">berthub.eu</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.23</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://avi.im/blag/2024/sqlite-past-present-future/" title="How bloom filters made SQLite 10x faster - blag">How bloom filters made SQLite 10x faster - blag</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "avi.im"><span class="sitestr">avi.im</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.22</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://anvaka.github.io/city-roads/?" title="Draw all roads in a city at once">Draw all roads in a city at once</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "anvaka.github.io"><span class="sitestr">anvaka.github.io</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.21</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://www.rfleury.com/p/untangling-lifetimes-the-arena-allocator" title="Untangling Lifetimes: The Arena Allocator">Untangling Lifetimes: The Arena Allocator</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "www.rfleury.com"><span class="sitestr">www.rfleury.com</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.21</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://distill.pub/2021/gnn-intro" title="A Gentle Introduction to Graph Neural Networks">A Gentle Introduction to Graph Neural Networks</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "distill.pub"><span class="sitestr">distill.pub</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.21</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://distill.pub/2021/understanding-gnns" title="Understanding Convolutions on Graphs">Understanding Convolutions on Graphs</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "distill.pub"><span class="sitestr">distill.pub</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.21</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://www.home-assistant.io/blog/2024/12/19/voice-preview-edition-the-era-of-open-voice/" title="The era of open voice assistants has arrived - Home Assistant">The era of open voice assistants has arrived - Home Assistant</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "www.home-assistant.io"><span class="sitestr">www.home-assistant.io</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.21</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://www.anthropic.com/research/building-effective-agents" title="Building effective agents \ Anthropic">Building effective agents \ Anthropic</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "www.anthropic.com"><span class="sitestr">www.anthropic.com</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.20</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://huggingface.co/spaces/HuggingFaceH4/blogpost-scaling-test-time-compute" title="Scaling test-time compute - a Hugging Face Space by HuggingFaceH4">Scaling test-time compute - a Hugging Face Space by HuggingFaceH4</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "huggingface.co"><span class="sitestr">huggingface.co</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.18</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://rahul.gopinath.org/post/2019/12/07/python-mci/" title="Python Meta Circular Interpreter">Python Meta Circular Interpreter</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "rahul.gopinath.org"><span class="sitestr">rahul.gopinath.org</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.18</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://github.com/includeos/IncludeOS" title="GitHub - includeos/IncludeOS: A minimal, resource efficient unikernel for cloud services">GitHub - includeos/IncludeOS: A minimal, resource efficient unikernel for clo...</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "github.com"><span class="sitestr">github.com</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.17</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://automerge.github.io/blog/automerge-2/" title="Automerge 2.0 | Automerge CRDT">Automerge 2.0 | Automerge CRDT</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "automerge.github.io"><span class="sitestr">automerge.github.io</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.17</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://www.more-magic.net/posts/crunch.html" title="Let&#39;s CRUNCH! | More magic">Let&#39;s CRUNCH! | More magic</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "www.more-magic.net"><span class="sitestr">www.more-magic.net</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.17</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://sailor.li/aocnds.html" title="Advent of Code on the Nintendo DS">Advent of Code on the Nintendo DS</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "sailor.li"><span class="sitestr">sailor.li</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.16</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://knowyourmeme.com/memes/shoggoth-with-smiley-face-artificial-intelligence" title="Shoggoth with Smiley Face (Artificial Intelligence) | Know Your Meme">Shoggoth with Smiley Face (Artificial Intelligence) | Know Your Meme</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "knowyourmeme.com"><span class="sitestr">knowyourmeme.com</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.15</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://irrationalanalysis.substack.com/p/tenstorrent-and-the-state-of-ai-hardware" title="Tenstorrent and the State of AI Hardware Startups">Tenstorrent and the State of AI Hardware Startups</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "irrationalanalysis.substack.com"><span class="sitestr">irrationalanalysis.substack.com</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.15</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://rish-01.github.io/blog/posts/ml_estimation/" title="Maximum Likelihood Estimation and Loss Functions | Rish&#39;s AI Notes">Maximum Likelihood Estimation and Loss Functions | Rish&#39;s AI Notes</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "rish-01.github.io"><span class="sitestr">rish-01.github.io</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.15</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://cacm.acm.org/opinion/on-program-synthesis-and-large-language-models/" title="On Program Synthesis and Large Language Models – Communications of the ACM">On Program Synthesis and Large Language Models – Communications of the ACM</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "cacm.acm.org"><span class="sitestr">cacm.acm.org</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.15</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://siboehm.com/articles/22/Fast-MMM-on-CPU" title="Fast Multidimensional Matrix Multiplication on CPU from Scratch">Fast Multidimensional Matrix Multiplication on CPU from Scratch</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "siboehm.com"><span class="sitestr">siboehm.com</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.15</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://siboehm.com/articles/22/CUDA-MMM" title="How to Optimize a CUDA Matmul Kernel for cuBLAS-like Performance: a Worklog">How to Optimize a CUDA Matmul Kernel for cuBLAS-like Performance: a Worklog</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "siboehm.com"><span class="sitestr">siboehm.com</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.15</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://andrewkchan.dev/posts/yalm.html" title="Fast LLM Inference From Scratch">Fast LLM Inference From Scratch</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "andrewkchan.dev"><span class="sitestr">andrewkchan.dev</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.15</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://docs.zml.ai/" title="Welcome to ZML - ZML">Welcome to ZML - ZML</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "docs.zml.ai"><span class="sitestr">docs.zml.ai</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.15</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://github.com/JanNeuendorf/SVC16" title="GitHub - JanNeuendorf/SVC16: Simplest Virtual Computer">GitHub - JanNeuendorf/SVC16: Simplest Virtual Computer</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "github.com"><span class="sitestr">github.com</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.13</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://lwn.net/Articles/997784/" title="Rust&#39;s incremental compiler architecture [LWN.net]">Rust&#39;s incremental compiler architecture [LWN.net]</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "lwn.net"><span class="sitestr">lwn.net</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.13</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://souzatharsis.github.io/tamingllms/markdown/toc.html" title="Taming LLMs">Taming LLMs</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "souzatharsis.github.io"><span class="sitestr">souzatharsis.github.io</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.13</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://www.alexmurrell.co.uk/articles/the-age-of-average" title="The age of average — Alex Murrell">The age of average — Alex Murrell</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "www.alexmurrell.co.uk"><span class="sitestr">www.alexmurrell.co.uk</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">12.11</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="https://developers.redhat.com/articles/2024/12/11/making-memcpynull-null-0-well-defined" title="Making memcpy(NULL, NULL, 0) well-defined | Red Hat Developer">Making memcpy(NULL, NULL, 0) well-defined | Red Hat Developer</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "developers.redhat.com"><span class="sitestr">developers.redhat.com</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              
+
+              <tr class="morespace" style="height:10px">
+                <td></td>
+              </tr>
+              <tr>
+                <td colspan="2"></td>
+                <td class='title'>
+		  <a href="./2024.html#more" class='morelink'>More</a>
+                </td>
+              </tr>
+              <tr class="morespace" style="height:10px">
+                <td></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table width="100%" cellspacing="0" cellpadding="1">
+              <tr>
+                <td bgcolor="#d13490"></td>
+              </tr>
+            </table><br>
+            <center>
+            </center>
+          </td>
+        </tr>
+      </table>
+    </center>
   </body>
 </html>
