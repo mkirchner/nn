@@ -100,10 +100,9 @@ and (max-width : 750px) {
                 <td class="title">
                   <span class="titleline">
 
-                      <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(80, true) }}</a>
+                      <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(80, false) }}</a>
 
-                  <span class="sitebit comhead">(<a href=
-		  "{{ bm.url.rpartition('//')[-1].partition('/')[0] }}"><span class="sitestr">{{bm.url.rpartition('//')[-1].partition('/')[0]}}</span></a>)</span></span>
+                  <span class="sitebit comhead">(<span class="sitestr">{{bm.site}}</span>)</span></span>
                 </td>
               </tr>
               <tr class="spacer" style="height:5px">

@@ -105,15 +105,14 @@ and (max-width : 750px) {
                   <span class="titleline">
 
               {% if year == years[0] and loop.index0 == 50 %}
-                      <a id="more" href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(80, true) }}</a>
+                      <a id="more" href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(80, false) }}</a>
 		    
 	      {% else %}
 
                       <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(80, true) }}</a>
 	      {% endif %}
 
-                  <span class="sitebit comhead">(<a href=
-		  "{{ bm.url.rpartition('//')[-1].partition('/')[0] }}"><span class="sitestr">{{bm.url.rpartition('//')[-1].partition('/')[0]}}</span></a>)</span></span>
+                  <span class="sitebit comhead">(<span class="sitestr">{{bm.site}}</span>)</span></span>
                 </td>
               </tr>
               <tr class="spacer" style="height:5px">
