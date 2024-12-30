@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en" op="news">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="origin">
+    <meta name="viewport" content=
+    "width=device-width, initial-scale=1.0">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="rss">
+    <link rel="manifest" href="./site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <title>
+      The Deep End
+    </title>
+<style>
+body  { font-family:Verdana, Geneva, sans-serif; font-size:10pt; color:#828282; }
+td    { font-family:Verdana, Geneva, sans-serif; font-size:10pt; color:#828282; }
+
+a:link    { color:#000000; text-decoration:none; }
+a:visited { color:#828282; text-decoration:none; }
+
+.default { font-family:Verdana, Geneva, sans-serif; font-size: 10pt; color:#828282; }
+.title   { font-family:Verdana, Geneva, sans-serif; font-size: 10pt; color:#828282; overflow:hidden; }
+.pagetop { font-family:Verdana, Geneva, sans-serif; font-size: 10pt; color:#222222; line-height:12px; }
+.comhead { font-family:Verdana, Geneva, sans-serif; font-size:  8pt; color:#828282; }
+.hnname  { margin-left:1px; margin-right: 5px; }
+
+#hnmain { min-width: 796px; }
+
+.title a { word-break: break-word; }
+
+.comment a:link, .comment a:visited { text-decoration: underline; }
+
+.pagetop a:visited { color:#000000;}
+
+.comhead a:link, .subtext a:visited { color:#828282; }
+.comhead a:hover { text-decoration:underline; }
+
+.default p { margin-top: 8px; margin-bottom: 0px; }
+
+.rotate180 {
+  -webkit-transform: rotate(180deg);  /* Chrome and other webkit browsers */
+  -moz-transform:    rotate(180deg);  /* FF */
+  -o-transform:      rotate(180deg);  /* Opera */
+  -ms-transform:     rotate(180deg);  /* IE9 */
+  transform:         rotate(180deg);  /* W3C complaint browsers */
+
+  /* IE8 and below */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=0, M21=0, M22=-1, DX=0, DY=0, SizingMethod='auto expand')";
+}
+
+/* mobile device */
+@media only screen
+and (min-width : 300px)
+and (max-width : 750px) {
+  #hnmain { width: 100%; min-width: 0; }
+  body { padding: 0; margin: 0; width: 100%; }
+  td { height: inherit !important; }
+  .title, .comment { font-size: inherit;  }
+  span.pagetop { display: block; margin: 3px 5px; font-size: 12px; line-height: normal }
+  span.pagetop b { display: block; font-size: 15px; }
+  table.comment-tree .comment a { display: inline-block; max-width: 200px; overflow: hidden; white-space: nowrap;
+    text-overflow: ellipsis; vertical-align:top; }
+  .title { font-size: 11pt; line-height: 14pt;  }
+}
+
+</style>
+  </head>
+  <body>
+    <center>
+      <table id="hnmain" border="0" cellpadding="0" cellspacing="0"
+						    width="85%">
+
+        <tr>
+          <td bgcolor="#d13490">
+            <table border="0" cellpadding="0" cellspacing="0"
+            width="100%" style="padding:2px">
+              <tr>
+                <td style="line-height:16pt; height:16px;">
+                  <span class="pagetop">
+		  <b class="hnname"><a href= "news">The Deep End</a></b>
+		  <a href= "./index.html">latest</a>|
+		  {%- for yr in years -%}
+		    <a href="./{{ yr }}.html">{{yr - 2000}}</a>
+		    {%- if not loop.last -%} | {%- endif -%}
+		  {%- endfor %}
+		  </span>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr id="pagespace" title="" style="height:10px">
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>
+            <table border="0" cellpadding="0" cellspacing="0">
+
+            {% for bm in bookmarks %}
+
+              <tr class='athing submission'>
+                <td align="right" valign="top" class="title">
+			<span class="rank">{{ bm.ts[5:10] | replace("-", ".") }}</span>
+                </td>
+
+		<td>&nbsp;-&nbsp;</td>
+
+                <td class="title">
+                  <span class="titleline">
+
+                      <a href="{{ bm.url }}" title="{{ bm.title }}">{{ bm.title | truncate(80, true) }}</a>
+
+                  <span class="sitebit comhead">(<a href=
+		  "{{ bm.url.rpartition('//')[-1].partition('/')[0] }}"><span class="sitestr">{{bm.url.rpartition('//')[-1].partition('/')[0]}}</span></a>)</span></span>
+                </td>
+              </tr>
+              <tr class="spacer" style="height:5px">
+                <td></td>
+              </tr>
+
+              {% endfor %}
+
+              <tr class="morespace" style="height:10px">
+                <td></td>
+              </tr>
+              <tr>
+                <td colspan="2"></td>
+                <td class='title'>
+		  <a href="./{{ years[0] }}.html#more" class='morelink'>More</a>
+                </td>
+              </tr>
+              <tr class="morespace" style="height:10px">
+                <td></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <table width="100%" cellspacing="0" cellpadding="1">
+              <tr>
+                <td bgcolor="#d13490"></td>
+              </tr>
+            </table><br>
+            <center>
+            </center>
+          </td>
+        </tr>
+      </table>
+    </center>
+  </body>
+</html>
