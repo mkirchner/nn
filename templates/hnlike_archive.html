@@ -98,7 +98,9 @@ and (max-width : 750px) {
 
               <tr class='athing submission'>
                 <td align="right" valign="top" class="title" style="padding-right:0.4em">
+              {% if loop.previtem is not defined or bm.ts[5:10] != loop.previtem.ts[5:10] %}
 			<span class="rank">{{ bm.ts[5:10] | replace("-", ".") }}</span>
+              {% endif %}
                 </td>
 
                 <td class="title">
