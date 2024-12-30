@@ -60,8 +60,6 @@ and (max-width : 750px) {
   .title, .comment { font-size: inherit;  }
   span.pagetop { display: block; margin: 3px 5px; font-size: 12px; line-height: normal }
   span.pagetop b { display: block; font-size: 15px; }
-  table.comment-tree .comment a { display: inline-block; max-width: 200px; overflow: hidden; white-space: nowrap;
-    text-overflow: ellipsis; vertical-align:top; }
   .title { font-size: 11pt; line-height: 14pt;  }
 }
 
@@ -107,11 +105,9 @@ and (max-width : 750px) {
             {% for bm in bookmarks %}
 
               <tr class='athing submission'>
-                <td align="right" valign="top" class="title">
+                <td align="right" valign="top" class="title" style="padding-right:0.4em">
 			<span class="rank">{{ bm.ts[5:10] | replace("-", ".") }}</span>
                 </td>
-
-		<td>&nbsp;-&nbsp;</td>
 
                 <td class="title">
                   <span class="titleline">
