@@ -53,7 +53,11 @@ def render_site(db_url, target):
     archive_years = list(range(2016, 2025))
     archive_years.reverse()
 
-    db =  nn.db.create_store(db_url)
+    try:
+        db =  nn.db.create_store(db_url)
+    except RuntimeError as e:
+        print(e)
+        exit(1)
 
     # events
     # events = db.get_events(last=20)  # FIXME: last gets ignored
@@ -85,10 +89,14 @@ def render_site(db_url, target):
 @click.option("--db-url", envvar="NN_DB_URL")
 def import_readinglist(db_url):
     """Import Safari reading list"""
-    db =  nn.db.create_store(db_url)
-    srl = nn.srl.SafariReadingList()
-    rows = [(str(ts), str(ts), url, t, pre) for (ts, url, t, pre) in srl.get()]
-    db.add_links(rows)
+    try:
+        db =  nn.db.create_store(db_url)
+        srl = nn.srl.SafariReadingList()
+        rows = [(str(ts), str(ts), url, t, pre) for (ts, url, t, pre) in srl.get()]
+        db.add_links(rows)
+    except RuntimeError as e:
+        print(str(e))
+        exit(1)
 
 @cli.command()
 @click.option("--db-url", envvar="NN_DB_URL")
