@@ -69,7 +69,8 @@ def render_site(db_url, target):
     # index.html
     links = db.get_links(last=50)
     bookmarks = [dict(ts=l[0], url=l[1], title=l[2], preview=l[3]) for l in links]
-    template = env.get_template("nn.html")
+    # template = env.get_template("nn.html")
+    template = env.get_template("hnlike.html")
     html = template.render(years=archive_years, bookmarks=bookmarks)
     with open(os.path.join(target, "index.html"), "w", encoding="utf-8") as f:
         f.write(html)
@@ -79,7 +80,8 @@ def render_site(db_url, target):
         links = db.get_links(for_year=year)
         bookmarks = [dict(ts=l[0], url=l[1], title=l[2], preview=l[3]) for l in links]
         #bookmarks.reverse()  # prefer asc time order
-        template = env.get_template("archive.html")
+        # template = env.get_template("archive.html")
+        template = env.get_template("hnlike_archive.html")
         html = template.render(years=archive_years, year=year, bookmarks=bookmarks)
         with open(os.path.join(target, f"{year}.html"), "w", encoding="utf-8") as f:
             f.write(html)
