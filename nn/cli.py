@@ -3,8 +3,8 @@ import nn.db
 import nn.srl
 import nn.pocket
 import nn.crawl
-# import nn.events
 import os.path
+from urllib.parse import urlparse
 from tabulate import tabulate
 # this will need to go into a separate file
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -66,9 +66,16 @@ def render_site(db_url, target):
     # with open(os.path.join(target, "events.html"), "w", encoding="utf-8") as f:
     #     f.write(html)
 
+    def site(url):
+       o = urlparse(url)
+       host = o.netloc
+       if host == "github.com":
+           host += f"/{o.path.split('/')[1]}"
+       return host
+
     # index.html
     links = db.get_links(last=50)
-    bookmarks = [dict(ts=l[0], url=l[1], title=l[2], preview=l[3]) for l in links]
+    bookmarks = [dict(ts=l[0], url=l[1], site=site(l[1]), title=l[2], preview=l[3]) for l in links]
     # template = env.get_template("nn.html")
     template = env.get_template("hnlike.html")
     html = template.render(years=archive_years, bookmarks=bookmarks)
@@ -78,7 +85,7 @@ def render_site(db_url, target):
     # archives
     for year in archive_years:
         links = db.get_links(for_year=year)
-        bookmarks = [dict(ts=l[0], url=l[1], title=l[2], preview=l[3]) for l in links]
+        bookmarks = [dict(ts=l[0], url=l[1], site=site(l[1]), title=l[2], preview=l[3]) for l in links]
         #bookmarks.reverse()  # prefer asc time order
         # template = env.get_template("archive.html")
         template = env.get_template("hnlike_archive.html")
