@@ -35,15 +35,15 @@ class SQLiteStore(Store):
         # parse URL
         o = urlparse(url)
         if not o.scheme or o.scheme.lower() != "sqlite":
-            raise SQLiteLinkStoreError("Invalid URL scheme for SQLite")
+            raise SQLiteStoreError("Invalid URL scheme for SQLite")
         if o.netloc:
-            raise SQLiteLinkStoreError("Netloc must be empty for SQLite")
+            raise SQLiteStoreError("Netloc must be empty for SQLite")
         # connect to DB
         self.conn = None
         try:
             self.conn = sqlite3.connect(o.path)
         except:
-            raise SQLiteLinkStoreError("Could not connect to SQLite DB")
+            raise SQLiteStoreError("Could not connect to SQLite DB")
         # initialize tables if required
         self._init_db()
 
