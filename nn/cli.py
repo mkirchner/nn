@@ -50,7 +50,7 @@ def autocomplete(db_url, status):
 @click.option("--target", "-t", required=True, help="Target directory")
 def render_site(db_url, target):
     """Render the site"""
-    archive_years = list(range(2016, 2025))
+    archive_years = list(range(2016, 2026))
     archive_years.reverse()
 
     try:
