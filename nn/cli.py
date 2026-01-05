@@ -51,8 +51,6 @@ def autocomplete(db_url, status):
 def render_site(db_url, target):
     """Render the site"""
     archive_years = list(range(2016, 2027))
->>>>>>> Stashed changes
->>>>>>> main
     archive_years.reverse()
 
     try:
