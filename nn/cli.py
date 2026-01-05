@@ -50,7 +50,13 @@ def autocomplete(db_url, status):
 @click.option("--target", "-t", required=True, help="Target directory")
 def render_site(db_url, target):
     """Render the site"""
+<<<<<<< Updated upstream
     archive_years = list(range(2016, 2025))
+||||||| Stash base
+    archive_years = list(range(2016, 2026))
+=======
+    archive_years = list(range(2016, 2027))
+>>>>>>> Stashed changes
     archive_years.reverse()
 
     try:
