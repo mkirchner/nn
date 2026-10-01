@@ -4,6 +4,7 @@ import nn.srl
 import nn.pocket
 import nn.crawl
 import os.path
+from datetime import datetime, timezone
 from urllib.parse import urlparse
 from tabulate import tabulate
 # this will need to go into a separate file
@@ -50,6 +51,7 @@ def autocomplete(db_url, status):
 @click.option("--target", "-t", required=True, help="Target directory")
 def render_site(db_url, target):
     """Render the site"""
+    rendered_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
     archive_years = list(range(2016, 2027))
     archive_years.reverse()
 
@@ -78,7 +80,7 @@ def render_site(db_url, target):
     bookmarks = [dict(ts=l[0], url=l[1], site=site(l[1]), title=l[2], preview=l[3]) for l in links]
     # template = env.get_template("nn.html")
     template = env.get_template("hnlike.html")
-    html = template.render(years=archive_years, bookmarks=bookmarks)
+    html = template.render(years=archive_years, bookmarks=bookmarks, rendered_at=rendered_at)
     with open(os.path.join(target, "index.html"), "w", encoding="utf-8") as f:
         f.write(html)
 
