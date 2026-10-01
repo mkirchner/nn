@@ -14,8 +14,8 @@ Current sources and outputs:
 - SQLite storage: `nn/db.py`
 - Click CLI: `nn/cli.py`
 - Jinja templates: `templates/`
-- Rendered static site: `docs/`
-- Local/production SQLite databases: usually under `db/` or pointed to by `NN_DB_URL`; these should not be source-controlled going forward.
+- Rendered static site: published from the separate `gh-pages` branch.
+- Local/production SQLite databases: usually under `db/` or pointed to by `NN_DB_URL`; these should not be source-controlled.
 
 ## Repository map
 
@@ -27,10 +27,11 @@ Current sources and outputs:
 - `nn/crawl.py` — fetches pages and extracts titles.
 - `nn/events.py` — experimental event scraping support.
 - `templates/` — Jinja templates used by `render-site`.
-- `docs/` — generated static website output, committed for publishing.
 - `db/` — local SQLite databases. These are runtime/content artifacts, not source files.
 - `pyproject.toml` — Poetry package metadata and dependencies.
 - `Makefile` — page publishing helper; read it before running any target.
+
+The `main` branch is for source and tooling. Generated website files do not belong on `main`; they are committed to `gh-pages` by `make page-update`.
 
 ## Setup
 
@@ -69,9 +70,9 @@ Important safety rules for agents:
 
 - Do **not** commit SQLite databases. Use `NN_DB_URL` to point at the intended local, scratch, or production database.
 - Prefer a scratch database such as `sqlite:////tmp/nn-dev.sqlite` for experiments.
-- Do **not** run `make page-update` unless explicitly requested. It requires `NN_DB_URL`, imports the local Safari Reading List into that database, renders `docs/`, commits the rendered site, and pushes the current branch.
+- Do **not** commit generated site output to `main`.
+- Do **not** run `make page-update` unless explicitly requested. It requires `NN_DB_URL`, imports the local Safari Reading List into that database, renders into a `gh-pages` worktree, commits the rendered site there, and pushes `gh-pages`.
 - Do **not** assume Safari data exists or is accessible in non-interactive environments.
-- Treat `docs/` as generated website output, but keep in mind it is intentionally tracked on the publishing branch for GitHub Pages.
 
 ## Common tasks
 
@@ -97,6 +98,12 @@ Render the site to a target directory:
 
 ```sh
 NN_DB_URL=sqlite:////tmp/nn-dev.sqlite poetry run nn render-site -t /tmp/nn-site
+```
+
+Publish the site to GitHub Pages when explicitly requested:
+
+```sh
+NN_DB_URL=sqlite:////absolute/path/to/bookmarks.sqlite make page-update
 ```
 
 List recent entries:

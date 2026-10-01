@@ -17,6 +17,9 @@ env/
 .env
 .env.*
 
+# Generated website output belongs on the gh-pages branch, not main
+/docs/
+
 # Local database files, backups, and scratch SQLite files
 /db/*.sqlite
 *.sqlite.bak
