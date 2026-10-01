@@ -120,13 +120,24 @@ class SQLiteStore(Store):
         return rows
 
     def add_links(self, links):
+        links = list(links)
+        if not links:
+            return 0
+
+        cur = self.conn.cursor()
+        urls = [link[2] for link in links]
+        placeholders = ",".join("?" for _ in urls)
+        cur.execute(f"select url from bookmarks where url in ({placeholders})", urls)
+        existing_urls = {row[0] for row in cur.fetchall()}
+        new_count = len(set(urls) - existing_urls)
+
         sql = """
         insert into bookmarks (ctime, utime, url, title, preview) values (?,?,?,?,?)
             on conflict(url) do update set utime = EXCLUDED.ctime
         """
-        cur = self.conn.cursor()
         cur.executemany(sql, links)
         self.conn.commit()
+        return new_count
 
     def update_link_title(self, url, title):
         sql = """

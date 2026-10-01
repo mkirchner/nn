@@ -104,9 +104,10 @@ def import_readinglist(db_url):
         db =  nn.db.create_store(db_url)
         srl = nn.srl.SafariReadingList()
         rows = [(str(ts), str(ts), url, t, pre) for (ts, url, t, pre) in srl.get()]
-        db.add_links(rows)
+        new_count = db.add_links(rows)
+        click.echo(new_count)
     except RuntimeError as e:
-        print(str(e))
+        click.echo(str(e), err=True)
         exit(1)
 
 @cli.command()
