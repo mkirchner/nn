@@ -1,10 +1,36 @@
 # Agent Guide
 
-This repository contains `nn`, a small Python link collector and static-site renderer.
+This repository contains `nn`, a small Python link collector and static-site renderer for **The Deep End**.
+
+## Current repository model
+
+The project is intentionally split into three parts:
+
+1. **`main` branch: source and tooling only**
+   - Python package source
+   - Jinja templates
+   - package metadata and lock file
+   - publishing helper in `Makefile`
+   - no generated website output
+   - no tracked SQLite database
+
+2. **`gh-pages` branch: generated website only**
+   - rendered HTML and static assets at the branch root
+   - published by GitHub Pages from `gh-pages` `/`
+   - no Python package source
+   - no SQLite database
+
+3. **SQLite database: local/external runtime artifact**
+   - selected with `NN_DB_URL`
+   - commonly kept locally as `db/bookmarks.sqlite`
+   - ignored by Git
+   - used as input to rendering, not deployed with the site
+
+There is no longer a `rel` branch in the normal workflow.
 
 ## What the project does
 
-`nn` collects links from personal export/import sources, stores them in SQLite, and renders a static HTML website from the database.
+`nn` collects links from personal import sources, stores them in SQLite, and renders a static HTML website from the database.
 
 Current sources and outputs:
 
@@ -14,103 +40,161 @@ Current sources and outputs:
 - SQLite storage: `nn/db.py`
 - Click CLI: `nn/cli.py`
 - Jinja templates: `templates/`
-- Rendered static site: published from the separate `gh-pages` branch.
-- Local/production SQLite databases: usually under `db/` or pointed to by `NN_DB_URL`; these should not be source-controlled.
+- Rendered static site: `gh-pages` branch
+- Local/production database: `NN_DB_URL`, often `sqlite:////absolute/path/to/db/bookmarks.sqlite`
 
-## Repository map
+## Repository map on `main`
 
 - `nn/` — Python package source.
-- `nn/cli.py` — CLI command definitions and rendering flow.
-- `nn/db.py` — database abstraction and SQLite implementation.
+- `nn/cli.py` — CLI commands and the site rendering flow.
+- `nn/db.py` — storage abstraction and SQLite implementation.
 - `nn/srl.py` — reads Safari's `Bookmarks.plist` and extracts Reading List entries.
 - `nn/pocket.py` — parses a Pocket HTML export.
 - `nn/crawl.py` — fetches pages and extracts titles.
 - `nn/events.py` — experimental event scraping support.
-- `templates/` — Jinja templates used by `render-site`.
-- `db/` — local SQLite databases. These are runtime/content artifacts, not source files.
-- `pyproject.toml` — Poetry package metadata and dependencies.
-- `Makefile` — page publishing helper; read it before running any target.
+- `templates/` — Jinja templates.
+- `templates/hnlike.html` — current index page template.
+- `templates/hnlike_archive.html` — current archive page template.
+- `templates/nn.html`, `templates/archive.html`, `templates/events.html` — older/alternate templates.
+- `pyproject.toml` — Poetry package metadata and dependency constraints.
+- `poetry.lock` — locked dependency versions.
+- `Makefile` — publishing helper.
+- `README.md` — minimal human-facing project description.
+- `AGENTS.md` — this file.
 
-The `main` branch is for source and tooling. Generated website files do not belong on `main`; they are committed to `gh-pages` by `make page-update`.
+Directories/files intentionally absent or ignored on `main`:
+
+- `docs/` — generated website output; belongs on `gh-pages`, not `main`.
+- `db/*.sqlite` — local SQLite databases; runtime/content artifacts, not source files.
+- Python caches and virtualenvs.
 
 ## Setup
 
-This project is configured for Poetry:
+This project is configured for Poetry. If Poetry is installed directly:
 
 ```sh
 poetry install
 poetry run nn --help
 ```
 
-If Poetry is not available, use an isolated virtual environment and install the package with an equivalent PEP 517/pip workflow.
-
-The CLI entry point is:
+If Poetry is not installed, `uvx` can run the pinned Poetry workflow without a global Poetry install:
 
 ```sh
-nn --help
+uvx --from poetry==1.8.3 poetry install
+uvx --from poetry==1.8.3 poetry run nn --help
 ```
 
-or, when using Poetry:
+This checkout may also have a local `.venv`; in that case the CLI can be invoked as:
 
 ```sh
-poetry run nn --help
+.venv/bin/nn --help
 ```
 
-## Database safety
+## Database usage and safety
 
-Most commands accept `--db-url` or read `NN_DB_URL` from the environment. Use this to choose a scratch, local, or production database explicitly:
+Most commands accept `--db-url` or read `NN_DB_URL` from the environment. Always choose the intended database explicitly.
+
+Scratch/development example:
 
 ```sh
 export NN_DB_URL=sqlite:////tmp/nn-dev.sqlite
-poetry run nn import-pocket --source /path/to/pocket-export.html
-poetry run nn render-site -t /tmp/nn-site
+.venv/bin/nn import-pocket --source /path/to/pocket-export.html
+.venv/bin/nn render-site -t /tmp/nn-site
+```
+
+Production/local example:
+
+```sh
+export NN_DB_URL=sqlite:////absolute/path/to/db/bookmarks.sqlite
 ```
 
 Important safety rules for agents:
 
-- Do **not** commit SQLite databases. Use `NN_DB_URL` to point at the intended local, scratch, or production database.
-- Prefer a scratch database such as `sqlite:////tmp/nn-dev.sqlite` for experiments.
-- Do **not** commit generated site output to `main`.
-- Do **not** run `make page-update` unless explicitly requested. It requires `NN_DB_URL`, imports the local Safari Reading List into that database, renders into a `gh-pages` worktree, commits the rendered site there, and pushes `gh-pages`.
+- Do **not** commit SQLite databases.
+- Do **not** commit generated website output to `main`.
+- Do **not** create or restore a `rel` publishing workflow.
+- Do **not** run `make page-update` unless explicitly requested by the user.
 - Do **not** assume Safari data exists or is accessible in non-interactive environments.
+- Prefer scratch databases and temporary render directories for experiments.
 
-## Common tasks
+## Common commands
 
-List available CLI commands:
+List CLI commands:
 
 ```sh
-poetry run nn --help
+.venv/bin/nn --help
+```
+
+or:
+
+```sh
+uvx --from poetry==1.8.3 poetry run nn --help
 ```
 
 Import Safari Reading List into the selected database:
 
 ```sh
-NN_DB_URL=sqlite:////tmp/nn-dev.sqlite poetry run nn import-readinglist
+NN_DB_URL=sqlite:////tmp/nn-dev.sqlite .venv/bin/nn import-readinglist
 ```
 
-Import Pocket export:
+Import a Pocket export:
 
 ```sh
-NN_DB_URL=sqlite:////tmp/nn-dev.sqlite poetry run nn import-pocket --source /path/to/export.html
+NN_DB_URL=sqlite:////tmp/nn-dev.sqlite .venv/bin/nn import-pocket --source /path/to/export.html
 ```
 
-Render the site to a target directory:
+Render the site to a temporary directory:
 
 ```sh
-NN_DB_URL=sqlite:////tmp/nn-dev.sqlite poetry run nn render-site -t /tmp/nn-site
-```
-
-Publish the site to GitHub Pages when explicitly requested:
-
-```sh
-NN_DB_URL=sqlite:////absolute/path/to/bookmarks.sqlite make page-update
+NN_DB_URL=sqlite:////tmp/nn-dev.sqlite .venv/bin/nn render-site -t /tmp/nn-site
 ```
 
 List recent entries:
 
 ```sh
-NN_DB_URL=sqlite:////tmp/nn-dev.sqlite poetry run nn list-recent --limit 20
+NN_DB_URL=sqlite:////tmp/nn-dev.sqlite .venv/bin/nn list-recent --limit 20
 ```
+
+## Publishing to GitHub Pages
+
+Publishing is done from `main` with:
+
+```sh
+export NN_DB_URL=sqlite:////absolute/path/to/db/bookmarks.sqlite
+make page-update
+```
+
+`make page-update` does the following:
+
+1. Requires `NN_DB_URL` to be set.
+2. Fetches `origin/gh-pages`.
+3. Creates or resets a sibling worktree at `../nn-gh-pages` for the `gh-pages` branch.
+4. Runs `nn import-readinglist` against `NN_DB_URL`.
+5. Runs `nn render-site -t ../nn-gh-pages`.
+6. Commits changed generated files on `gh-pages` with message `release` if there are changes.
+7. Pushes `gh-pages`.
+8. Removes the temporary worktree.
+
+The target is configurable:
+
+```sh
+PAGE_BRANCH=gh-pages PAGE_WORKTREE=/tmp/nn-gh-pages make page-update
+```
+
+GitHub Pages is configured to publish from:
+
+```text
+gh-pages /
+```
+
+## Rendering notes
+
+- The current renderer is `render_site()` in `nn/cli.py`.
+- Index output uses `templates/hnlike.html`.
+- Archive output uses `templates/hnlike_archive.html`.
+- The index template receives `rendered_at`, a UTC timestamp formatted as `YYYY-MM-DD HH:MM:SS UTC`, and displays it below the pink footer bar.
+- Archive years are currently hard-coded in `nn/cli.py`.
+- Rendering currently writes `index.html` plus one archive file per configured year.
 
 ## Verification
 
@@ -118,12 +202,27 @@ There is no formal test suite yet. Useful lightweight checks:
 
 ```sh
 python -m compileall -q nn
-poetry run nn --help
+.venv/bin/nn --help
+uvx --from poetry==1.8.3 poetry check --lock
 ```
 
-For changes to rendering, use a scratch database and render to a temporary directory, then inspect the generated HTML.
+For rendering changes, if the user has not asked for production publishing, render to a temporary directory with a scratch database and inspect the generated HTML.
 
-For changes to importers, prefer small fixture files or scratch copies of real exports. Do not depend on the user's live Safari profile unless the task specifically asks for it.
+For importer changes, prefer small fixture files or scratch copies of real exports. Do not depend on the user's live Safari profile unless the task specifically asks for it.
+
+## Dependency maintenance
+
+Dependencies are managed with Poetry:
+
+- constraints: `pyproject.toml`
+- lock file: `poetry.lock`
+
+Use Poetry 1.8.3 for lock-file updates to preserve the existing lock format:
+
+```sh
+uvx --from poetry==1.8.3 poetry update <package> --lock
+uvx --from poetry==1.8.3 poetry check --lock
+```
 
 ## Extension guidance
 
@@ -133,11 +232,11 @@ When adding functionality:
 - Keep storage changes in `nn/db.py` and preserve the existing `create_store(url)` factory pattern unless intentionally redesigning storage.
 - Prefer adding importer-specific code to a separate module, similar to `srl.py` and `pocket.py`.
 - Keep rendering data preparation in `nn/cli.py` unless it grows enough to justify extraction.
-- Update this file when setup, commands, or safety assumptions change.
+- Update this file when setup, commands, branch structure, deployment, or safety assumptions change.
 
 Known rough edges agents should be aware of:
 
-- The project currently has minimal documentation and no automated tests.
+- The project currently has minimal human-facing documentation and no automated tests.
 - Some code paths are personal-workflow-specific, especially Safari Reading List import and `make page-update`.
 - `events.py` appears experimental and requires external credentials for Eventbrite-related behavior.
 - Generated site years are currently hard-coded in `nn/cli.py`.
