@@ -1,0 +1,29 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Local environment/configuration
+.env
+.env.*
+
+# Local database files, backups, and scratch SQLite files
+/db/*.sqlite
+*.sqlite.bak
+*.sqlite-shm
+*.sqlite-wal
+
+# OS/editor noise
+.DS_Store
+.idea/
+.vscode/

@@ -1,9 +1,12 @@
-all:
-	@echo "Read the Makefile; run only in the rel branch"
+.PHONY: all page-update
 
-update:
+all:
+	@echo "Read the Makefile; run page-update only when you intend to publish the site"
+
+page-update:
+	@test -n "$$NN_DB_URL" || (echo "Set NN_DB_URL to the production SQLite database URL before publishing" >&2; exit 1)
 	nn import-readinglist
 	nn render-site -t docs
-	git add -u
+	git add docs
 	git commit -m "release"
-	git push --set-upstream origin $(git_current_branch)
+	git push --set-upstream origin $$(git branch --show-current)
