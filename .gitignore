@@ -20,6 +20,7 @@ env/
 # Local database files, backups, and scratch SQLite files
 /db/*.sqlite
 *.sqlite.bak
+*.sqlite.bak.*
 *.sqlite-shm
 *.sqlite-wal
 
